@@ -7,21 +7,14 @@
   text-align: center;
   position: relative;
   background-color: #0D0F12;
-  overflow: hidden;
+
+overflow-y: hidden;
 }
 
-.hero-glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(108,99,255,0.25) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-}
 
 .hero-content {
+    display: flex;
+  flex-direction: column;
   position: relative;
   z-index: 1;
 }
@@ -30,12 +23,54 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 4rem;
   font-weight: 600;
+display: flex;
+justify-content: space-evenly;
+
   color: #E6EDF3;
-  line-height: 1.1;
+  line-height: 1.5;
+  margin-top:20px;
+  margin-bottom: 14px;
 }
 
 .hero-sub {
   font-size: 1.2rem;
   color: #8B949E;
   margin-top: 16px;
+}
+.hero-buttons {
+  display: flex;
+  gap: 23px;
+  margin-top: 24px;
+  align-items: center;
+ justify-content: center;
+}
+
+.Joinbtn,
+.Startbtn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.Joinbtn {
+  background-color: #6C63FF;
+  color: #E6EDF3;
+  border: none;
+}
+
+.Joinbtn:hover {
+  background-color: #857DFF;
+}
+
+.Startbtn {
+  background-color: transparent;
+  color: #E6EDF3;
+  border: 1px solid #6C63FF;
+}
+
+.Startbtn:hover {
+  background-color: #161B22;
 }

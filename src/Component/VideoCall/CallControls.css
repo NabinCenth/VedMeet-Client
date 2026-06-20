@@ -1,0 +1,65 @@
+.call-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 40px !important; 
+  
+  /* The outer box effect */
+  background-color: rgba(20, 20, 35, 0.8);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+  border-radius: 60px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  
+  width: fit-content;
+  margin: 30px auto;
+}
+.call-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+}
+
+.control-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 24px;
+  
+  /* The boxed background container effect */
+  background-color: #1a1a2e;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+.mute-btn, .camera-btn {
+  background-color: #1a1a2e;
+}
+
+.mute-btn:hover, .camera-btn:hover {
+  background-color: #2a2a3e;
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hang-up-btn {
+  background-color: #ff5757;
+  border: 1px solid rgba(255, 87, 87, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 87, 87, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hang-up-btn:hover {
+  background-color: #ff3333;
+  box-shadow: 0 6px 20px rgba(255, 87, 87, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}

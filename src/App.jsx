@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import './App.css'
 import Landing from './Pages/Landing'
-
+import Videocall from './Pages/Videocall'
+import NavBar from './Component/NavBar/NavBar'
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
     <>
-    <Landing/>
+     <div className="hero-glow"></div>
+    <NavBar/>
+    {/* <Landing/> */}
+    <Videocall/>
     </>
   )
 }
