@@ -64,11 +64,18 @@ justify-content: space-evenly;
 .Joinbtn:hover {
   background-color: #857DFF;
 }
-
+.Joinbtn:active {
+  transform: scale(0.98);
+   background-color: #6C63FF;
+}
 .Startbtn {
   background-color: transparent;
   color: #E6EDF3;
   border: 1px solid #6C63FF;
+}
+.Startbtn:active {
+  transform: scale(0.98);
+    background-color: transparent;
 }
 
 .Startbtn:hover {

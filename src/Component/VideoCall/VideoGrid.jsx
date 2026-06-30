@@ -1,8 +1,12 @@
 import React from 'react'
-
-function VideoGrid() {
+import "./VIdeoGrid.css"
+function VideoGrid({children}) {
   return (
-      <></>
+      <>
+     <div className="video-grid">
+        {children}
+      </div>
+       </>
   )
 }
 

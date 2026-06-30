@@ -1,0 +1,15 @@
+.video-grid {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  justify-content: center;
+  align-items: stretch;
+}
+
+
+@media (max-width: 768px) {
+  .video-grid {
+    flex-direction: column;
+  }
+
+  }

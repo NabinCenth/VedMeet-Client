@@ -1,0 +1,6 @@
+.videocall-container {
+  padding-top: 25px;
+  padding-bottom: 15px; /* Space before controls */
+  display: flex;
+  justify-content: center;
+}
