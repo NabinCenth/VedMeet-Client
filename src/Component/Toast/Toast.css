@@ -1,0 +1,152 @@
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 16px 24px;
+  max-width: 90%;
+  min-width: fit-content;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 9999;
+  animation: slideIn 0.3s ease-out;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+}
+
+.toast-icon {
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.toast-message {
+  color: #e6edf3;
+  font-size: 15px;
+  margin: 0;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Success Toast */
+.toast-success {
+  border-color: #238636;
+  background-color: #0d3a1f;
+}
+
+.toast-success .toast-icon {
+  color: #3fb950;
+}
+
+.toast-success .toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background-color: #3fb950;
+  border-radius: 0 0 8px 0;
+}
+
+/* Error Toast */
+.toast-error {
+  border-color: #da3633;
+  background-color: #3d1f1f;
+}
+
+.toast-error .toast-icon {
+  color: #f85149;
+}
+
+.toast-error .toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background-color: #f85149;
+  border-radius: 0 0 8px 0;
+}
+
+/* Info Toast - Your brand color */
+.toast-info {
+  border-color: #6c63ff;
+  background-color: #1a1630;
+}
+
+.toast-info .toast-icon {
+  color: #6c63ff;
+}
+
+.toast-info .toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background-color: #6c63ff;
+  border-radius: 0 0 8px 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .toast {
+    top: 15px;
+    max-width: 85%;
+    padding: 14px 20px;
+  }
+
+  .toast-message {
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  .toast-icon {
+    font-size: 18px;
+    min-width: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .toast {
+    max-width: 90%;
+    padding: 12px 16px;
+  }
+
+  .toast-message {
+    font-size: 13px;
+  }
+}
