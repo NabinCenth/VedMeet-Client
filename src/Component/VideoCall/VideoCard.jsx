@@ -1,18 +1,19 @@
-import React from 'react'
+import {useRef} from 'react'
 import "./VideoCard.css"
 
-function VideoCard({ name , stream = null }) {
+function VideoCard({ name , stream = null,videoref = null}) {
+
   return (
     <div className="video-card">
       <video 
+      ref={videoref}
         className="video-stream"
         autoPlay 
         playsInline 
         muted
-        srcObject={stream}
       />
       <div className="video-label">
-        <div className="status-indicator"></div>
+      <div className={`status-indicator ${videoref ? "online" : "offline"}`} />
         <span>{name}</span>
       </div>
     </div>

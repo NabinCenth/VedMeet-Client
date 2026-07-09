@@ -31,9 +31,15 @@
 .status-indicator {
   width: 8px;
   height: 8px;
-  background-color: #4ade80;
   border-radius: 50%;
   animation: pulse 2s infinite;
+}
+ .offline {
+  background-color: #f87171;
+  animation: none;
+}
+ .online {
+  background-color: #34d399;
 }
 
 @keyframes pulse {

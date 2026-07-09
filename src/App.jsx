@@ -11,11 +11,12 @@ import {
   useNavigate,
 } from "react-router-dom";
 import ShareModal from "./Component/ShareModal/ShareModal";
-import ContextProvider from "./Component/Context/Context";
 import { ContextData } from "./Component/Context/Context";
+import JoinModal from "./Component/JoinModal/JoinModal";
+import {SocketProvider} from "./Component/Context/SocketContext";
 function App() {
   const navigate = useNavigate();
-  const { RoomId, onStart, setOnStart } = useContext(ContextData);
+  const { RoomId, onStart, setOnStart ,onJoinbtn} = useContext(ContextData);
   const onJoin = () => {
     navigate(`/videocall/${RoomId}`);
     setOnStart(false);
@@ -30,6 +31,7 @@ function App() {
         <Route path="/videocall/:roomId" element={<Videocall />} />
       </Routes>
       {onStart && <ShareModal roomId={RoomId} onJoin={onJoin} />}
+     { onJoinbtn && <JoinModal/>}
     </>
   );
 }
