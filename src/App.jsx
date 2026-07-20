@@ -17,10 +17,10 @@ import {SocketProvider} from "./Component/Context/SocketContext";
 function App() {
   const navigate = useNavigate();
   const { RoomId, onStart, setOnStart ,onJoinbtn} = useContext(ContextData);
-  const onJoin = () => {
-    navigate(`/videocall/${RoomId}`);
-    setOnStart(false);
-  };
+  // const onJoin = () => {
+  //   navigate(`/videocall/${RoomId}`);
+  //   setOnStart(false);
+  // };
 
   return (
     <>
@@ -30,7 +30,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/videocall/:roomId" element={<Videocall />} />
       </Routes>
-      {onStart && <ShareModal roomId={RoomId} onJoin={onJoin} />}
+      {onStart && <ShareModal roomId={RoomId}    message={RoomId?null:"Error Occured while creating new Room" }/>}
      { onJoinbtn && <JoinModal/>}
     </>
   );

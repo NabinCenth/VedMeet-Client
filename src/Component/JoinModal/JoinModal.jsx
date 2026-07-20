@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 
 function JoinModal({ onJoin }) {
   const { onJoinbtn, setOnJoinbtn } = useContext(ContextData);
-  const { setInputRoomId,setInputName } = useContext(SocketContext);
+  const { setInputRoomId,setInputName ,handleJoinRoom} = useContext(SocketContext);
   const [name, setName] = useState("");
   const [roomLink, setRoomLink] = useState("");
 const navigate =useNavigate();
@@ -17,8 +17,11 @@ const navigate =useNavigate();
     }
     if (!name.trim() || !roomLink.trim()) return;
     setInputRoomId(roomExtract(roomLink));
+  
     setInputName(name);
-    navigate(`/videocall/${roomExtract(roomLink)}`);
+    // console.log("Extractedroom",roomExtract(roomLink));
+    handleJoinRoom(name,roomExtract(roomLink));
+    
   };
   const roomExtract=(roomLink)=>{try{ const url = new URL(roomLink);
     const pathseg=url.pathname.split('/').filter(Boolean);

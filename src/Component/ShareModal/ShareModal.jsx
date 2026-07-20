@@ -3,24 +3,34 @@ import Toast from "../Toast/Toast";
 import "./ShareModal.css";
 import { useNavigate } from "react-router-dom";
 import { ContextData } from "../Context/Context";
+import { SocketContext } from "../Context/SocketContext";
+import { useWebrtc } from "../../Hooks/useWebrtc";
+function ShareModal({ roomId, message }) {
 
 
-function ShareModal({ roomId, onJoin }) {
+  const { handleStartRoom } = useContext(SocketContext);
+  const { RoomId, setOnStart } = useContext(ContextData);
   
-  const {RoomId,setOnStart} = useContext(ContextData);
   const [shareLink, setShareLink] = useState(
     `${window.location.origin}/videocall/${RoomId}`,
   );
+const navigate=useNavigate();
   const [copied, setCopied] = useState(false);
+//handle SOcket ROom
+const handleStart=()=>{
+  setOnStart(false);
+navigate(`/videocall/${RoomId}`)
+}
   const handleCopy = () => {
     navigator.clipboard.writeText(shareLink);
     setCopied(true);
   };
-   const handleBackdropClick = (e) => {
-  if (e.target === e.currentTarget) {
-    setOnStart(false);
-  }
-};
+
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      setOnStart(false);
+    }
+  };
   return (
     <>
       <div className="modal-overlay" onClick={handleBackdropClick}>
@@ -30,13 +40,13 @@ function ShareModal({ roomId, onJoin }) {
 
           <input
             type="text"
-            value={shareLink}
+            value={!message ? shareLink : message}
             readOnly
             className="share-link"
           />
 
           <button onClick={handleCopy}>Copy Link</button>
-          <button onClick={onJoin}>Start Call</button>
+          <button onClick={handleStart}>Start Call</button>
         </div>
       </div>
       {copied && (

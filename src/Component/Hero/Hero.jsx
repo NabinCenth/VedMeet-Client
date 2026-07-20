@@ -1,8 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Hero.css";
 import { SocketContext } from "../Context/SocketContext";
+import { ContextData } from "../Context/Context";
 export default function Hero() {
-  const { handleStart, handleJoin } = useContext(SocketContext);
+  const { handleStartRoom } = useContext(SocketContext);
+  const{setOnJoinbtn,setOnStart,RoomId}=useContext(ContextData);
+  const handlejoinBUtton=()=>{
+    setOnJoinbtn(true);
+  }
+  const handleStartButton=()=>{
+     
+setOnStart(true);
+  }
   return (
     <>
       <section className="hero">
@@ -15,10 +24,10 @@ export default function Hero() {
           </p>
 
           <div className="hero-buttons">
-            <button className="Joinbtn" onClick={handleJoin}>
+            <button className="Joinbtn" onClick={handlejoinBUtton}>
               Join a Call
             </button>
-            <button className="Startbtn" onClick={handleStart}>
+            <button className="Startbtn" onClick={handleStartRoom}>
               Start a Call
             </button>
           </div>
