@@ -35,10 +35,11 @@ export const useWebrtc = (stream) => {
         console.log("Remote stream received:", event.streams[0]);
         console.log("received event", event);
       };
-      if (isOfferer) {
+      if (isOfferer) {socket.on('user-joined', async () => {
         const offer = await pc.createOffer();
         await pc.setLocalDescription(offer);
         socket.emit("offer", { offer, RoomId });
+      });
         socket.on("answer", async ({ answer }) => {
           await pc.setRemoteDescription(new RTCSessionDescription(answer));
         });
