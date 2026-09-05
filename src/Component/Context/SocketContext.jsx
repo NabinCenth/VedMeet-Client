@@ -22,10 +22,12 @@ export const SocketProvider = ({ children }) => {
     if (!name || !roomIdExtract) {
       return;
     } else {
-      socket?.emit("joinRoom", data);
+      navigate(`/videocall/${roomIdExtract}`);
       setContextValue(data.roomId);
       setisOfferer(false);
-      navigate(`/videocall/${roomIdExtract}`);
+      socket?.emit("joinRoom", data);
+      
+      
     }
   };
 

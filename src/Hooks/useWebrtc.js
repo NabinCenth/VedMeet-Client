@@ -8,6 +8,23 @@ export const useWebrtc = (stream) => {
   const { isOfferer,socket } = useContext(SocketContext);
 
   useEffect(() => {
+    const handleOffer = async ({ offer }) => {
+  console.log("OFFER RECEIVED on joiner");
+
+  console.log("Offer received");
+
+await pc.setRemoteDescription(new RTCSessionDescription(offer));
+console.log("Remote description set");
+
+const answer = await pc.createAnswer();
+console.log("Answer created");
+
+await pc.setLocalDescription(answer);
+console.log("Local description set");
+
+console.log("Emitting answer", RoomId);
+socket.emit("answer", { answer, RoomId });
+};
     if (!stream) {
       return;
     }
@@ -35,25 +52,27 @@ export const useWebrtc = (stream) => {
         console.log("Remote stream received:", event.streams[0]);
         console.log("received event", event);
       };
-      if (isOfferer) {socket.on('user-joined', async () => {
+      //Offerer side
+      if (isOfferer) {socket.on('user-joined', async (socketId) => {
         const offer = await pc.createOffer();
         await pc.setLocalDescription(offer);
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));// for teswting 
         socket.emit("offer", { offer, RoomId });
+        console.log("Offer sent:", offer,socketId);
       });
-        socket.on("answer", async ({ answer }) => {
+        socket.on("answer", async ({answer}) => {
           await pc.setRemoteDescription(new RTCSessionDescription(answer));
         });
+        socket.emit("peer-ready");
       }
       console.log("isOfferer", isOfferer);
+      //Receiver side
       if (!isOfferer) {
-         console.log("Registering offer listener now");
-        socket.on("offer", async ({ offer }) => {
-            console.log("OFFER RECEIVED on joiner");
-          await pc.setRemoteDescription(new RTCSessionDescription(offer));
-          const answer = await pc.createAnswer();
-          await pc.setLocalDescription(answer);
-          socket.emit("answer", { answer, RoomId });
-        });
+            socket.on("offer",handleOffer); 
+            console.log("Registering offer listener now");
+              socket.emit("peer-ready")
+              
       }
       socket.on("ice-candidate", async ({ candidate }) => {
         await pc.addIceCandidate(new RTCIceCandidate(candidate));
@@ -64,7 +83,8 @@ export const useWebrtc = (stream) => {
       pc.close();
       socket.off("answer");
       socket.off("ice-candidate");
-      socket.off("offer");
+      socket.off("offer",handleOffer);
+      socket.off("user-joined")
     };
-  }, [stream]);
+  }, [stream,socket, RoomId, isOfferer]);
 };
