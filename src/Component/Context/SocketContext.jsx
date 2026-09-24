@@ -9,7 +9,7 @@ export const SocketProvider = ({ children }) => {
   const [inputName, setInputName] = useState(null);
   const [isOfferer, setisOfferer] = useState(null);//To distinguish who is Remote and Local
   const socket = useSocket();
-  const { RoomId, setContextValue } = useContext(ContextData);
+  const { RoomId, setContextValue,setRemoteStream } = useContext(ContextData);
   const { onStart, setOnStart } = useContext(ContextData);
   const { onJoinbtn, setOnJoinbtn } = useContext(ContextData);
   const [localname, setLocalname] = useState(null);
@@ -57,7 +57,7 @@ export const SocketProvider = ({ children }) => {
   };
   const handleEndCall = () => {
   socket?.emit("hangup", { RoomId });
-
+setRemoteStream(null);
   navigate("/");
   console.log("Call ended fromt the client side");
 };

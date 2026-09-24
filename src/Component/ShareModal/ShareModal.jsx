@@ -13,7 +13,7 @@ function ShareModal({ roomId, message }) {
   const { RoomId, setOnStart } = useContext(ContextData);
   
   const [shareLink, setShareLink] = useState(
-    `${window.location.origin}/videocall/${RoomId}`,
+    `${window.location.origin}/?room=${RoomId}`,
   );
 const navigate=useNavigate();
   const [copied, setCopied] = useState(false);

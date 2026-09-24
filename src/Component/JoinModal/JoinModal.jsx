@@ -7,32 +7,37 @@ import {useNavigate} from "react-router-dom";
 import IconBadge from "../Icon Badge/IconBadge";
 import { FiUsers } from "react-icons/fi";
 
-function JoinModal({ onJoin }) {
+function JoinModal({ onJoin, handleUrlRoomID }) {
   const { onJoinbtn, setOnJoinbtn } = useContext(ContextData);
   const { setInputRoomId,setInputName ,handleJoinRoom} = useContext(SocketContext);
   const [name, setName] = useState("");
   const [roomLink, setRoomLink] = useState("");
-const navigate =useNavigate();
+  const roomValue = handleUrlRoomID || roomLink;
+
   const handleJoin = () => {
-    if (!roomLink && !name) {
+    if (!roomValue && !name) {
       return;
     }
-    if (!name.trim() || !roomLink.trim()) return;
-    setInputRoomId(roomExtract(roomLink));
+    if (!name.trim() || !roomValue.trim()) return;
+    setInputRoomId(roomExtract(roomValue));
   
     setInputName(name);
     // console.log("Extractedroom",roomExtract(roomLink));
-    handleJoinRoom(name,roomExtract(roomLink));
+    handleJoinRoom(name,roomExtract(roomValue));
     
   };
-  const roomExtract=(roomLink)=>{try{ const url = new URL(roomLink);
-    const pathseg=url.pathname.split('/').filter(Boolean);
-    return pathseg[pathseg.length-1]; }
-   catch{
-    return roomLink.trim();
-   }
-  
+ const roomExtract = (input) => {
+  const text = input.trim();
+  try {
+    const url = new URL(text, window.location.origin);
+    const fromQuery = url.searchParams.get("room");
+    if (fromQuery) return fromQuery;
+    const seg = url.pathname.split("/").filter(Boolean);
+    return seg[seg.length - 1] ?? "";
+  } catch {
+    return text;
   }
+};
  const handleBackdropClick = (e) => {
   if (e.target === e.currentTarget) {
     setOnJoinbtn(false);
@@ -57,8 +62,9 @@ const navigate =useNavigate();
           type="text"
           className="link-input"
           placeholder="Paste room link or ID"
-          value={roomLink}
-          onChange={(e) => setRoomLink(e.target.value)}
+          value={roomValue}
+          onChange={(e)=>{ setRoomLink(e.target.value);}}
+          readOnly={Boolean(handleUrlRoomID)}
         />
 
         <button className="join-btn" onClick={handleJoin}>
