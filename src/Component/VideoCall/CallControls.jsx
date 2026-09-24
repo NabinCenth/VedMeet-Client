@@ -2,15 +2,16 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdCall } from 'react-icons/md'
 import './CallControls.css'
-
+import { useContext } from 'react'
+import { SocketContext } from '../Context/SocketContext'
 function CallControls() {
+const { handleEndCall } = useContext(SocketContext);
   const [isMuted, setIsMuted] = React.useState(false)
   const [isCameraOff, setIsCameraOff] = React.useState(false)
   const navigate =useNavigate();
- const handleEnd=()=>{
-navigate("/");
- }
-  return (
+ 
+ 
+  return (<> 
     <div className="call-controls">
       <button 
         className="control-btn mute-btn"
@@ -26,11 +27,11 @@ navigate("/");
         {isCameraOff ? <MdVideocamOff size={24} /> : <MdVideocam size={24} />}
       </button>
       
-      <button className="control-btn hang-up-btn" onClick={handleEnd}>
+      <button className="control-btn hang-up-btn" onClick={handleEndCall}>
         <MdCall size={24} />
       </button>
-    </div>
-  )
-}
+    </div></>
+  )}
+
 
 export default CallControls

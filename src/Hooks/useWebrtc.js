@@ -5,7 +5,7 @@ import { ContextData } from "../Component/Context/Context";
 import { SocketContext } from "../Component/Context/SocketContext";
 export const useWebrtc = (stream) => {
   const { setRemoteStream, RoomId } = useContext(ContextData);
-  const { isOfferer,socket } = useContext(SocketContext);
+  const { isOfferer,socket,setRemotename } = useContext(SocketContext);
 
   useEffect(() => {
     const handleOffer = async ({ offer }) => {
@@ -53,7 +53,9 @@ socket.emit("answer", { answer, RoomId });
         console.log("received event", event);
       };
       //Offerer side
-      if (isOfferer) {socket.on('user-joined', async (socketId) => {
+      if (isOfferer) {socket.on('user-joined', async (socketId,Name) => {
+        console.log("User joined:", socketId,Name);
+        setRemotename(Name);
         const offer = await pc.createOffer();
         await pc.setLocalDescription(offer);
 
@@ -77,6 +79,12 @@ socket.emit("answer", { answer, RoomId });
       socket.on("ice-candidate", async ({ candidate }) => {
         await pc.addIceCandidate(new RTCIceCandidate(candidate));
       });
+
+      socket.on("hangup", () => {
+  pc.close();
+  setRemoteStream(null);
+  console.log("Peer has hung up. Connection closed.");
+});
     };
     setup();
     return () => {

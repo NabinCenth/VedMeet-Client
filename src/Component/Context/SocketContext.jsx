@@ -12,6 +12,8 @@ export const SocketProvider = ({ children }) => {
   const { RoomId, setContextValue } = useContext(ContextData);
   const { onStart, setOnStart } = useContext(ContextData);
   const { onJoinbtn, setOnJoinbtn } = useContext(ContextData);
+  const [localname, setLocalname] = useState(null);
+  const [remotename, setRemotename] = useState(null);
   const navigate=useNavigate();
   const handleJoinRoom = (name,roomIdExtract) => {
     setOnJoinbtn(false);
@@ -26,7 +28,7 @@ export const SocketProvider = ({ children }) => {
       setContextValue(data.roomId);
       setisOfferer(false);
       socket?.emit("joinRoom", data);
-      
+      setLocalname(name);
       
     }
   };
@@ -53,6 +55,13 @@ export const SocketProvider = ({ children }) => {
     socket?.emit("createRoom");
     setisOfferer(true);
   };
+  const handleEndCall = () => {
+  socket?.emit("hangup", { RoomId });
+
+  navigate("/");
+  console.log("Call ended fromt the client side");
+};
+ 
   return (
     <SocketContext.Provider
       value={{
@@ -60,7 +69,7 @@ export const SocketProvider = ({ children }) => {
         handleJoinRoom,
         setInputRoomId,
         setInputName,
-        isOfferer,socket
+        isOfferer,socket,localname,remotename,setRemotename,handleEndCall
       }}
     >
       {children}
