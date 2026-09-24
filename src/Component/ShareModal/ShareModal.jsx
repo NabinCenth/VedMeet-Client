@@ -3,8 +3,9 @@ import Toast from "../Toast/Toast";
 import "./ShareModal.css";
 import { useNavigate } from "react-router-dom";
 import { ContextData } from "../Context/Context";
+import IconBadge from "../Icon Badge/IconBadge";
 import { SocketContext } from "../Context/SocketContext";
-import { useWebrtc } from "../../Hooks/useWebrtc";
+import { MdAddIcCall } from "react-icons/md";
 function ShareModal({ roomId, message }) {
 
 
@@ -35,6 +36,9 @@ navigate(`/videocall/${RoomId}`)
     <>
       <div className="modal-overlay" onClick={handleBackdropClick}>
         <div className="modal-content">
+          <IconBadge>
+            <MdAddIcCall size={40}  />
+          </IconBadge>
           <h2>Start a Call</h2>
           <p>Share this link with others:</p>
 
@@ -44,9 +48,9 @@ navigate(`/videocall/${RoomId}`)
             readOnly
             className="share-link"
           />
-
+<div className="btn-container"> 
           <button onClick={handleCopy}>Copy Link</button>
-          <button onClick={handleStart}>Start Call</button>
+          <button onClick={handleStart}>Start Call</button></div>
         </div>
       </div>
       {copied && (

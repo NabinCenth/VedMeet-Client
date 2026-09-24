@@ -2,7 +2,13 @@ html, body {
   margin: 0;
   padding: 0;
   background-color:#0a0b10; 
-    background: radial-gradient(circle at center, #17192b 0%, #090a0f 70%);
+   background: radial-gradient(
+    ellipse at center,
+    #1a1c2e 0%,
+    #0d0f17 50%,
+    #08090e 100%
+  );
+  background-attachment: fixed; 
   color: #ffffff;          
   min-height: 100vh;
  font-family: "Space Grotesk", sans-serif;  

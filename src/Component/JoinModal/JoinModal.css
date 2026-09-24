@@ -48,6 +48,11 @@
 .modal-content .join-btn:active {
   transform: scale(0.98);
 }
+.modal-overlay{
+  background-color: rgba(13, 15, 18, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
 @media (max-width: 600px) {
   .name-input,
   .link-input {

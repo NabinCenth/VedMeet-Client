@@ -4,6 +4,8 @@ import "../ShareModal/ShareModal.css";
 import {ContextData} from "../Context/Context";
 import { SocketContext } from "../Context/SocketContext";
 import {useNavigate} from "react-router-dom";
+import IconBadge from "../Icon Badge/IconBadge";
+import { FiUsers } from "react-icons/fi";
 
 function JoinModal({ onJoin }) {
   const { onJoinbtn, setOnJoinbtn } = useContext(ContextData);
@@ -40,6 +42,7 @@ const navigate =useNavigate();
   return (
     <div className="modal-overlay" onClick={handleBackdropClick}>
       <div className="modal-content">
+       <IconBadge> <FiUsers size={40}  /></IconBadge>
         <h2>Join a Call</h2>
 
         <input

@@ -16,8 +16,12 @@ setOnStart(true);
     <>
       <section className="hero">
         <div className="hero-content">
+          <div className="hero-badge">
+      <span className="badge-dot"></span>
+      INSTANT VIDEO CALLS
+    </div>
           <h1 className="hero-title">
-            Meet Anyone <br /> Anywhere
+            Meet Anyone <br /> <span className="gradient-text">Anywhere</span>
           </h1>
           <p className="hero-sub">
             Instant video calls. No downloads. Just share a link.
