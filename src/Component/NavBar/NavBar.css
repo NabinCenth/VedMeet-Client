@@ -55,3 +55,22 @@
 .navbar-btn:active {
   transform: scale(0.98);
 }
+@media (max-width: 600px) {
+  .navbar {
+    padding: 16px 18px;
+  }
+
+  .navbar-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+  .navbar-btn {
+    padding: 9px 15px;
+    font-size: 0.85rem;
+  }
+}

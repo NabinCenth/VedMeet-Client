@@ -53,7 +53,7 @@ socket.emit("answer", { answer, RoomId });
         console.log("received event", event);
       };
       //Offerer side
-      if (isOfferer) {socket.on('user-joined', async (socketId,Name) => {
+      if (isOfferer) {socket.on('user-joined', async ({socketId,Name}) => {
         console.log("User joined:", socketId,Name);
         setRemotename(Name);
         const offer = await pc.createOffer();
